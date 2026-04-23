@@ -1,0 +1,27 @@
+package com.claudio.moviereservation.controller;
+
+import com.claudio.moviereservation.dto.AuthResponse;
+import com.claudio.moviereservation.dto.LoginRequest;
+import com.claudio.moviereservation.dto.RegisterRequest;
+import com.claudio.moviereservation.service.AuthService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/auth")
+@RequiredArgsConstructor
+public class AuthController {
+
+    private final AuthService authService;
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authService.register(request));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
+    }
+}
